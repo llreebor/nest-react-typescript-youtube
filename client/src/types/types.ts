@@ -23,16 +23,9 @@ export interface IResponseDataUser {
 }
 
 export interface IIncome {
-	createdAt: string
-	id: number
+	title: string
 	sum: number
-	title: string
-	updatedAt: string
-}
-
-export interface ICategory {
-	createdAt: string
-	id: number
-	title: string
-	updatedAt: string
+	id?: number
+	createdAt?: string
+	updatedAt?: string
 }

@@ -1,18 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
-import { IUser } from '../../types/types'
+import { IIncome, IUser } from '../../types/types'
 
 // Define a type for the slice state
 interface IUserState {
 	user: IUser | null
 	isAuth: boolean
+	incomes: IIncome[]
 }
 
 // Define the initial state using that type
 const initialState: IUserState = {
 	user: null,
 	isAuth: false,
+	incomes: [],
 }
 
 export const userSlice = createSlice({
@@ -29,10 +31,13 @@ export const userSlice = createSlice({
 			state.user = null
 			state.isAuth = false
 		},
+		fillIncome: (state, action: PayloadAction<IIncome[]>) => {
+			state.incomes = action.payload
+		},
 	},
 })
 
-export const { login, logout } = userSlice.actions
+export const { login, logout, fillIncome } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.user

@@ -1,5 +1,4 @@
 import { IsEmail, IsOptional, MinLength } from 'class-validator'
-import { Category } from 'src/category/entities/category.entity'
 import { Income } from 'src/income/entities/income.entity'
 
 export class CreateUserDto {
@@ -16,6 +15,4 @@ export class CreateUserDto {
 	token: string
 	@IsOptional()
 	income: Income[]
-	@IsOptional()
-	category: Category[]
 }

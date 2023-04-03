@@ -6,7 +6,6 @@ import BudgetForm from '../components/BudgetForm'
 
 const Incomes = () => {
 	const incomes = useLoaderData() as IIncome[]
-
 	return (
 		<>
 			<BudgetForm />
@@ -29,7 +28,7 @@ const Incomes = () => {
 									<td className='py-2'>{income.title}</td>
 									<td className='py-2'>{income.sum}</td>
 									<td className='py-2 text-right'>
-										{useFormattedDate(income.createdAt)}
+										{income.createdAt}
 									</td>
 									<td className='py-2 flex justify-end gap-2'>
 										<button className='btn btn-green flex'>

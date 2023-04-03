@@ -1,10 +1,10 @@
 import { instance } from '../api/axios.api'
-import { ICategory } from '../types/types'
+import { IIncome } from '../types/types'
 
 export const IncomeService = {
-	// Get All Categories
-	async getCategories(): Promise<ICategory[]> {
-		const { data } = await instance.get('/category')
+	// Create Income
+	async createIncome(incomeData: IIncome) {
+		const { data } = await instance.post('/income', incomeData)
 		return data
 	},
 }

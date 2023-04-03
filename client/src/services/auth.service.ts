@@ -23,7 +23,6 @@ export const AuthService = {
 	// GetMe
 	async getMe() {
 		const { data } = await instance.get('user/me')
-
 		if (data) return data
 		return
 	},

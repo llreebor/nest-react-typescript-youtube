@@ -1,14 +1,11 @@
-import { Category } from 'src/category/entities/category.entity'
 import { User } from 'src/user/entity/user.entity'
 import {
 	Column,
 	CreateDateColumn,
 	Entity,
 	JoinColumn,
-	JoinTable,
 	ManyToMany,
 	ManyToOne,
-	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm'
@@ -27,9 +24,6 @@ export class Income {
 	@ManyToOne(() => User, (user) => user.income)
 	@JoinColumn({ name: 'user_id' })
 	user: User
-
-	@ManyToMany(() => Category, (category) => category.incomes)
-	categories: Category[]
 
 	@CreateDateColumn()
 	createdAt: Date

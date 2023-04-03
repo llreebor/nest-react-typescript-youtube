@@ -13,8 +13,14 @@ export class IncomeService {
 	) {}
 
 	// Create Income
-	async create(createIncomeDto: CreateIncomeDto) {
-		const newIncome = this.incomeRepository.create(createIncomeDto)
+	async create(createIncomeDto: CreateIncomeDto, user) {
+		const newIncome = this.incomeRepository.create({
+			title: createIncomeDto.title,
+			sum: createIncomeDto.sum,
+			user: {
+				id: user,
+			},
+		})
 		return this.incomeRepository.save(newIncome)
 	}
 

@@ -1,4 +1,3 @@
-import { Category } from 'src/category/entities/category.entity'
 import { User } from 'src/user/entity/user.entity'
 import {
 	Column,
@@ -25,9 +24,6 @@ export class Expense {
 	@ManyToOne(() => User, (user) => user.income)
 	@JoinColumn({ name: 'user_id' })
 	user: User
-
-	@ManyToMany(() => Category, (category) => category.incomes)
-	categories: Category[]
 
 	@CreateDateColumn()
 	createdAt: Date

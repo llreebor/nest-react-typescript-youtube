@@ -6,8 +6,7 @@ import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { IncomeModule } from './income/income.module'
-import { CategoryModule } from './category/category.module';
-import { ExpenseModule } from './expense/expense.module';
+import { ExpenseModule } from './expense/expense.module'
 
 @Module({
 	imports: [
@@ -29,7 +28,6 @@ import { ExpenseModule } from './expense/expense.module';
 			inject: [ConfigService],
 		}),
 		IncomeModule,
-		CategoryModule,
 		ExpenseModule,
 	],
 	controllers: [AppController],
