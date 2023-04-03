@@ -43,14 +43,14 @@ const Login = () => {
 					onSubmit={onSubmit}
 					className='flex w-1/3 flex-col mx-auto gap-5'>
 					<input
-						className='bg-transparent py-2 px-4 border border-slate-800 rounded-md outline-none focus:border-slate-300'
+						className='input'
 						type='text'
 						placeholder='Email'
 						name='email'
 						onChange={(e) => setEmail(e.target.value)}
 					/>
 					<input
-						className='bg-transparent py-2 px-4 border border-slate-800 rounded-md outline-none focus:border-slate-300'
+						className='input'
 						type='text'
 						placeholder='Password'
 						name='password'

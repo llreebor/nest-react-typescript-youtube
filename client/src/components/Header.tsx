@@ -50,9 +50,7 @@ const Header = () => {
 			)}
 
 			{isAuth ? (
-				<button
-					onClick={logoutHandler}
-					className='flex gap-2 items-center text-sm text-white hover:text-white  bg-rose-900 hover:bg-rose-800 py-2 px-4 rounded-md'>
+				<button onClick={logoutHandler} className='btn btn-red'>
 					<span>Log Out</span>
 					<FaSignOutAlt />
 				</button>

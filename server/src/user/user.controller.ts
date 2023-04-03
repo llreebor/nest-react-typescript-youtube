@@ -3,7 +3,7 @@ import {
 	Controller,
 	Get,
 	Post,
-	Request,
+	Req,
 	UseGuards,
 	UsePipes,
 	ValidationPipe,
@@ -16,15 +16,15 @@ import { UserService } from './user.service'
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
+	@UseGuards(JwtAuthGuard)
+	@Get('/me')
+	getMe(@Req() req) {
+		return req.user
+	}
+
 	@Post()
 	@UsePipes(new ValidationPipe())
 	create(@Body() createUserDto: CreateUserDto) {
 		return this.userService.createUser(createUserDto)
-	}
-
-	@UseGuards(JwtAuthGuard)
-	@Get('/me')
-	getMe(@Request() req) {
-		return req.user
 	}
 }

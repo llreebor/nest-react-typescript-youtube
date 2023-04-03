@@ -12,6 +12,7 @@ import { login, logout } from './store/user/userSlice'
 import { getTokenFromLocalStorage } from './helpers/localStorage'
 import { AuthService } from './services/auth.service'
 import ProtectedRoute from './components/ProtectedRoute'
+import { findAllIncomes } from './loaders/income.loaders'
 
 const router = createBrowserRouter([
 	{
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'incomes',
+				loader: findAllIncomes,
 				element: (
 					<ProtectedRoute>
 						<Incomes />
@@ -58,18 +60,19 @@ const App: FC = () => {
 	const dispatch = useAppDispatch()
 
 	const checkAuth = async () => {
+		const token = getTokenFromLocalStorage()
 		try {
-			const token = getTokenFromLocalStorage()
-
 			if (token) {
 				const data = await AuthService.getMe()
-				dispatch(
-					login({
-						id: data.id,
-						email: data.email,
-						token,
-					})
-				)
+				if (data) {
+					dispatch(
+						login({
+							id: data.id,
+							email: data.email,
+							token,
+						})
+					)
+				}
 			} else {
 				dispatch(logout())
 			}

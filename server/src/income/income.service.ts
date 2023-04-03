@@ -20,13 +20,15 @@ export class IncomeService {
 
 	// Find All Incomes
 	async findAll(id: number) {
-		return await this.incomeRepository.find({
+		const income = await this.incomeRepository.find({
 			where: {
 				user: {
 					id,
 				},
 			},
 		})
+
+		return income
 	}
 
 	// Find One Income

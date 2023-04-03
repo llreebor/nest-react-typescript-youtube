@@ -9,7 +9,8 @@ import { JwtService } from '@nestjs/jwt'
 @Injectable()
 export class UserService {
 	constructor(
-		@InjectRepository(User) private readonly userRepository: Repository<User>,
+		@InjectRepository(User)
+		private readonly userRepository: Repository<User>,
 		private readonly jwtService: JwtService,
 	) {}
 
@@ -26,7 +27,8 @@ export class UserService {
 			},
 		})
 
-		if (existUser) throw new BadRequestException('This email already exist!')
+		if (existUser)
+			throw new BadRequestException('This email already exist!')
 
 		const user = await this.userRepository.save({
 			email: createUserDto.email,

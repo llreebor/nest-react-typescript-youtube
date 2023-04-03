@@ -6,23 +6,23 @@
 # Categories
 
     *** CRUD CATEGORIES
-    -   Title
+    +   Title
 
 # Incomes
 
     *** CRUD INCOMES
     +   Title
     +   Sum
-    -   Category
+    +   Category
     +   Date
     *** Total INCOMES
 
 # Expenses
 
     *** CRUD EXPENSES
-    -   Title
-    -   Sum
-    -   Category
-    -   Date
+    +   Title
+    +   Sum
+    +   Category
+    +   Date
     *** Limit EXPENSES
     *** Total EXPENSES

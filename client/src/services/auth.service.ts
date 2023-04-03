@@ -9,7 +9,7 @@ export const AuthService = {
 		const { data } = await instance.post<
 			IUserData,
 			{ data: IResponseDataUser }
-		>('users', userData)
+		>('user', userData)
 		return data
 	},
 	// Login
@@ -22,7 +22,8 @@ export const AuthService = {
 	},
 	// GetMe
 	async getMe() {
-		const { data } = await instance.get('users/me')
+		const { data } = await instance.get('user/me')
+
 		if (data) return data
 		return
 	},

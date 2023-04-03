@@ -21,3 +21,18 @@ export interface IResponseDataUser {
 	_id: string | undefined
 	message: string | undefined
 }
+
+export interface IIncome {
+	createdAt: string
+	id: number
+	sum: number
+	title: string
+	updatedAt: string
+}
+
+export interface ICategory {
+	createdAt: string
+	id: number
+	title: string
+	updatedAt: string
+}

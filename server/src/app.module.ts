@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { IncomeModule } from './income/income.module'
 import { CategoryModule } from './category/category.module';
+import { ExpenseModule } from './expense/expense.module';
 
 @Module({
 	imports: [
@@ -29,6 +30,7 @@ import { CategoryModule } from './category/category.module';
 		}),
 		IncomeModule,
 		CategoryModule,
+		ExpenseModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
