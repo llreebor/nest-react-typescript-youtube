@@ -14,7 +14,7 @@ import { CreateIncomeDto } from './dto/create-income.dto'
 import { UpdateIncomeDto } from './dto/update-income.dto'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 
-@Controller('income')
+@Controller('incomes')
 export class IncomeController {
 	constructor(private readonly incomeService: IncomeService) {}
 

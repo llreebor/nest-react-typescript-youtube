@@ -1,27 +1,17 @@
-import { useState } from 'react'
-import { IncomeService } from '../services/income.service'
-import { useAppDispatch } from '../store/hooks'
-import { addIncome } from '../store/user/userSlice'
-import { toast } from 'react-toastify'
+import { FC } from 'react'
+import { Form } from 'react-router-dom'
 
-const BudgetForm = () => {
-	const [title, setTitle] = useState('')
-	const [sum, setSum] = useState('')
+interface IBudgetForm {
+	type: 'incomes' | 'expenses'
+}
 
-	const dispatch = useAppDispatch()
-
-	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		const data = await IncomeService.createIncome({ title, sum: +sum })
-		dispatch(addIncome(data))
-		setTitle('')
-		setSum('')
-		toast.success('Income Created')
-	}
-
+const BudgetForm: FC<IBudgetForm> = ({ type }) => {
 	return (
 		<div className='rounded-md bg-slate-800 mt-10 p-10 grid grid-cols-1 gap-10'>
-			<form className='grid grid-cols-1 gap-5' onSubmit={onSubmit}>
+			<Form
+				className='grid grid-cols-1 gap-5'
+				method='post'
+				action={`/${type}`}>
 				<label htmlFor='title'>
 					Title
 					<input
@@ -29,8 +19,7 @@ const BudgetForm = () => {
 						type='text'
 						placeholder='Title...'
 						name='title'
-						onChange={(e) => setTitle(e.target.value)}
-						value={title}
+						defaultValue={''}
 					/>
 				</label>
 				<label htmlFor='amount'>
@@ -40,16 +29,13 @@ const BudgetForm = () => {
 						type='number'
 						placeholder='Amount...'
 						name='amount'
-						onChange={(e) => setSum(e.target.value)}
-						value={sum}
+						defaultValue={''}
 					/>
 				</label>
-				<div className='flex gap-2 w-20'>
-					<button className='btn btn-green flex'>Submit</button>
-
-					<button className='btn btn-red flex'>Cancel</button>
-				</div>
-			</form>
+				<button type='submit' className='btn btn-green flex max-w-fit'>
+					Submit
+				</button>
+			</Form>
 		</div>
 	)
 }
