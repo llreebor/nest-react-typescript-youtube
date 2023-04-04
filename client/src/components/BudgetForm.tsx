@@ -1,24 +1,27 @@
 import { useState } from 'react'
 import { IncomeService } from '../services/income.service'
-import { IIncome } from '../types/types'
+import { useAppDispatch } from '../store/hooks'
+import { addIncome } from '../store/user/userSlice'
+import { toast } from 'react-toastify'
 
 const BudgetForm = () => {
 	const [title, setTitle] = useState('')
 	const [sum, setSum] = useState('')
-	const addIncome = (data: IIncome) => {
-		IncomeService.createIncome({ title, sum: +sum })
-	}
 
-	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const dispatch = useAppDispatch()
+
+	const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		IncomeService.createIncome({ title, sum: +sum })
+		const data = await IncomeService.createIncome({ title, sum: +sum })
+		dispatch(addIncome(data))
+		setTitle('')
+		setSum('')
+		toast.success('Income Created')
 	}
 
 	return (
-		<div className='rounded-md bg-slate-800 mt-10 p-10 grid grid-cols-4 gap-10'>
-			<form
-				className='grid grid-cols-1 gap-5 col-span-3'
-				onSubmit={onSubmit}>
+		<div className='rounded-md bg-slate-800 mt-10 p-10 grid grid-cols-1 gap-10'>
+			<form className='grid grid-cols-1 gap-5' onSubmit={onSubmit}>
 				<label htmlFor='title'>
 					Title
 					<input
@@ -27,6 +30,7 @@ const BudgetForm = () => {
 						placeholder='Title...'
 						name='title'
 						onChange={(e) => setTitle(e.target.value)}
+						value={title}
 					/>
 				</label>
 				<label htmlFor='amount'>
@@ -37,6 +41,7 @@ const BudgetForm = () => {
 						placeholder='Amount...'
 						name='amount'
 						onChange={(e) => setSum(e.target.value)}
+						value={sum}
 					/>
 				</label>
 				<div className='flex gap-2 w-20'>

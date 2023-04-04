@@ -7,4 +7,9 @@ export const IncomeService = {
 		const { data } = await instance.post('/income', incomeData)
 		return data
 	},
+
+	// Remove Income
+	async removeIncome(id: number) {
+		await instance.delete(`/income/${id}`)
+	},
 }
