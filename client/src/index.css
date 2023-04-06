@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	body {
+		@apply text-sm;
+	}
+}
 @layer components {
 	.btn {
 		@apply flex gap-2 items-center text-sm text-white hover:text-white py-2 px-4 rounded-md;
 	}
 	.input {
-		@apply bg-transparent py-2 px-4 border bg-slate-700 placeholder:text-white border-slate-800 rounded-md outline-none focus:border-slate-300 text-white placeholder:text-white/50;
+		@apply bg-transparent p-2 border bg-slate-700 placeholder:text-white border-slate-800 text-sm rounded-md outline-none focus:border-slate-300 text-white placeholder:text-white/50;
 	}
 }
 
@@ -16,6 +21,6 @@
 		@apply bg-rose-900 hover:bg-rose-800;
 	}
 	.btn-green {
-		@apply bg-green-700 hover:bg-green-500;
+		@apply bg-green-600 hover:bg-green-800;
 	}
 }

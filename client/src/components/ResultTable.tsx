@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import formatDate from '../helpers/date.helper'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
 import { Form, useLoaderData } from 'react-router-dom'
 import { IBudgetForm, IResponseIncomeLoaderData } from '../types/types'
 
@@ -13,10 +13,10 @@ const ResultTable: FC<IBudgetForm> = ({ type }) => {
 				<tr>
 					<td className='font-bold'>№</td>
 					<td className='font-bold'>Title</td>
-					<td className='font-bold'>Amount</td>
+					<td className='font-bold'>Amount ($)</td>
 					<td className='font-bold'>Category</td>
 					<td className='font-bold'>Date</td>
-					<td className='text-right'>Actions</td>
+					<td className='text-right'>Action</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,32 +30,22 @@ const ResultTable: FC<IBudgetForm> = ({ type }) => {
 							{income.amount}
 						</td>
 						<td className='text-sm text-white/50'>
-							{income.category?.title}
+							{income.category?.title || 'Other'}
 						</td>
 
 						<td className='text-sm text-white/50'>
 							{formatDate(String(income.createdAt))}
 						</td>
-						<td className='flex justify-end gap-2'>
-							<Form method='patch' action={`/${type}`} replace>
-								<button className='btn btn-green flex'>
-									<FaEdit />
-									<input
-										type='hidden'
-										name='id'
-										defaultValue={income.id}
-									/>
-								</button>
-							</Form>
-
+						<td className='flex justify-end'>
 							<Form method='delete' action={`/incomes`} replace>
-								<button className='btn btn-red flex'>
+								<input
+									type='hidden'
+									name='id'
+									defaultValue={income.id}
+								/>
+
+								<button className='btn btn-red flex p-2'>
 									<FaTrash />
-									<input
-										type='hidden'
-										name='id'
-										defaultValue={income.id}
-									/>
 								</button>
 							</Form>
 						</td>

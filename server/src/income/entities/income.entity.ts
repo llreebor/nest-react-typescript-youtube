@@ -24,7 +24,9 @@ export class Income {
 	@Column()
 	amount: number
 
-	@ManyToOne(() => Category, (category) => category.incomes)
+	@ManyToOne(() => Category, (category) => category.incomes, {
+		onDelete: 'SET NULL',
+	})
 	@JoinColumn({ name: 'category_id' })
 	category: Category
 

@@ -5,11 +5,8 @@ import {
 	CreateDateColumn,
 	Entity,
 	JoinColumn,
-	JoinTable,
-	ManyToMany,
 	ManyToOne,
 	OneToMany,
-	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm'
@@ -22,7 +19,9 @@ export class Category {
 	@Column()
 	title: string
 
-	@OneToMany(() => Income, (income) => income.category)
+	@OneToMany(() => Income, (income) => income.category, {
+		onDelete: 'SET NULL',
+	})
 	@JoinColumn({ name: 'income_id' })
 	incomes: Income[]
 

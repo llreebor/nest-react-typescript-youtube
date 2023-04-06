@@ -6,6 +6,10 @@ import Home from '../pages/Home'
 import Incomes, { incomeAction, incomeLoader } from '../pages/Incomes'
 import Layout from '../pages/Layout'
 import Auth from '../pages/Auth'
+import Categories, {
+	categoriesAction,
+	categoriesLoader,
+} from '../pages/Categories'
 
 export const router = createBrowserRouter([
 	{
@@ -26,6 +30,12 @@ export const router = createBrowserRouter([
 						<Incomes />
 					</ProtectedRoute>
 				),
+			},
+			{
+				path: 'categories',
+				element: <Categories />,
+				loader: categoriesLoader,
+				action: categoriesAction,
 			},
 			{
 				path: 'expenses',

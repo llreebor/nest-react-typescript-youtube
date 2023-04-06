@@ -8,6 +8,6 @@ import 'react-toastify/dist/ReactToastify.css'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<Provider store={store}>
 		<App />
-		<ToastContainer />
+		<ToastContainer position='bottom-right' autoClose={2000} />
 	</Provider>
 )

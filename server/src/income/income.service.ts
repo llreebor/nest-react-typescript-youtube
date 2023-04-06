@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+	BadRequestException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common'
 import { CreateIncomeDto } from './dto/create-income.dto'
 import { UpdateIncomeDto } from './dto/update-income.dto'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -14,14 +18,18 @@ export class IncomeService {
 
 	// Create Income
 	async create(createIncomeDto: CreateIncomeDto, id: number) {
-		const newIncome = this.incomeRepository.create({
+		const newIncome = {
 			title: createIncomeDto.title,
 			amount: createIncomeDto.amount,
 			category: { id: +createIncomeDto.category },
 			user: { id },
-		})
+		}
 
-		return this.incomeRepository.save(newIncome)
+		if (newIncome) return this.incomeRepository.save(newIncome)
+
+		console.log(newIncome)
+
+		throw new BadRequestException('Vasya')
 	}
 
 	// Find All Incomes
