@@ -14,13 +14,13 @@ export class UserService {
 		private readonly jwtService: JwtService,
 	) {}
 
-	// Find User
-	async findUser(email: string) {
-		return await this.userRepository.findOne({ where: { email: email } })
+	// Find
+	async find(email: string) {
+		return await this.userRepository.findOne({ where: { email } })
 	}
 
 	// Create User
-	async createUser(createUserDto: CreateUserDto) {
+	async create(createUserDto: CreateUserDto) {
 		const existUser = await this.userRepository.findOne({
 			where: {
 				email: createUserDto.email,

@@ -24,17 +24,17 @@ export class ExpenseController {
 		return this.expenseService.create(createExpenseDto)
 	}
 
-	@Get()
-	@UseGuards(JwtAuthGuard)
-	findAll(@Req() req) {
-		return this.expenseService.findAll(+req.user.id)
-	}
+	// @Get()
+	// @UseGuards(JwtAuthGuard)
+	// findAll(@Req() req) {
+	// 	return this.expenseService.findAll(+req.user.id)
+	// }
 
-	@Get(':id')
-	@UseGuards(JwtAuthGuard)
-	findOne(@Param('id') id: string, @Req() req) {
-		return this.expenseService.findOne(+id, req.user.id)
-	}
+	// @Get(':id')
+	// @UseGuards(JwtAuthGuard)
+	// findOne(@Param('id') id: string, @Req() req) {
+	// 	return this.expenseService.findOne(+id, req.user.id)
+	// }
 
 	@Patch(':id')
 	@UseGuards(JwtAuthGuard)

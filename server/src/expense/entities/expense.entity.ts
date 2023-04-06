@@ -21,9 +21,9 @@ export class Expense {
 	@Column()
 	sum: number
 
-	@ManyToOne(() => User, (user) => user.income)
-	@JoinColumn({ name: 'user_id' })
-	user: User
+	// @ManyToOne(() => User, (user) => user.income)
+	// @JoinColumn({ name: 'user_id' })
+	// user: User
 
 	@CreateDateColumn()
 	createdAt: Date

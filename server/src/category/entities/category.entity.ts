@@ -1,4 +1,4 @@
-import { Category } from 'src/category/entities/category.entity'
+import { Income } from 'src/income/entities/income.entity'
 import { User } from 'src/user/entity/user.entity'
 import {
 	Column,
@@ -8,27 +8,25 @@ import {
 	JoinTable,
 	ManyToMany,
 	ManyToOne,
+	OneToMany,
 	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm'
 
 @Entity()
-export class Income {
-	@PrimaryGeneratedColumn({ name: 'income_id' })
+export class Category {
+	@PrimaryGeneratedColumn({ name: 'category_id' })
 	id: number
 
 	@Column()
 	title: string
 
-	@Column()
-	amount: number
+	@OneToMany(() => Income, (income) => income.category)
+	@JoinColumn({ name: 'income_id' })
+	incomes: Income[]
 
-	@ManyToOne(() => Category, (category) => category.incomes)
-	@JoinColumn({ name: 'category_id' })
-	category: Category
-
-	@ManyToOne(() => User, (user) => user.incomes)
+	@ManyToOne(() => User, (user) => user.categories)
 	@JoinColumn({ name: 'user_id' })
 	user: User
 

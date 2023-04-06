@@ -24,8 +24,25 @@ export interface IResponseDataUser {
 
 export interface IIncome {
 	title: string
-	sum: number
+	amount: number
 	id?: number
+	category?: ICategory
 	createdAt?: string
 	updatedAt?: string
+}
+
+export interface ICategory {
+	id?: number
+	title: string
+	createdAt?: string
+	updatedAt?: string
+}
+
+export interface IResponseIncomeLoaderData {
+	incomes: IIncome[]
+	categories: ICategory[]
+}
+
+export interface IBudgetForm {
+	type: 'incomes' | 'expenses'
 }

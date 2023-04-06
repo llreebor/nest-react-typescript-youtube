@@ -19,31 +19,31 @@ export class ExpenseService {
 	}
 
 	// Find All Incomes
-	async findAll(id: number) {
-		return await this.expenseRepository.find({
-			where: {
-				user: {
-					id,
-				},
-			},
-		})
-	}
+	// async findAll(id: number) {
+	// 	return await this.expenseRepository.find({
+	// 		where: {
+	// 			user: {
+	// 				id,
+	// 			},
+	// 		},
+	// 	})
+	// }
 
 	// Find One Income
-	async findOne(id: number, userId: number) {
-		const isExist = await this.expenseRepository.findOneBy({
-			id,
-			user: {
-				id: userId,
-			},
-		})
+	// async findOne(id: number, userId: number) {
+	// 	const isExist = await this.expenseRepository.findOneBy({
+	// 		id,
+	// 		user: {
+	// 			id: userId,
+	// 		},
+	// 	})
 
-		if (!isExist) throw new NotFoundException('Income not found')
+	// 	if (!isExist) throw new NotFoundException('Income not found')
 
-		return await this.expenseRepository.find({
-			where: { id },
-		})
-	}
+	// 	return await this.expenseRepository.find({
+	// 		where: { id },
+	// 	})
+	// }
 
 	// Update Income
 	async update(id: number, updateExpenseDto: UpdateExpenseDto) {

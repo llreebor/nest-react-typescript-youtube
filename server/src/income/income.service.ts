@@ -13,44 +13,48 @@ export class IncomeService {
 	) {}
 
 	// Create Income
-	async create(createIncomeDto: CreateIncomeDto, user) {
+	async create(createIncomeDto: CreateIncomeDto, id: number) {
 		const newIncome = this.incomeRepository.create({
 			title: createIncomeDto.title,
-			sum: createIncomeDto.sum,
-			user: {
-				id: user,
-			},
+			amount: createIncomeDto.amount,
+			category: { id: +createIncomeDto.category },
+			user: { id },
 		})
+
 		return this.incomeRepository.save(newIncome)
 	}
 
 	// Find All Incomes
 	async findAll(id: number) {
-		const income = await this.incomeRepository.find({
+		const incomes = await this.incomeRepository.find({
 			where: {
 				user: {
 					id,
 				},
 			},
+			relations: {
+				category: true,
+				user: true,
+			},
 		})
 
-		return income
+		return incomes
 	}
 
 	// Find One Income
-	async findOne(id: number, userId: number) {
-		const isExist = await this.incomeRepository.findOneBy({
-			id,
-			user: {
-				id: userId,
+	async findOne(id: number) {
+		const isExist = await this.incomeRepository.findOne({
+			where: {
+				id,
+			},
+			relations: {
+				user: true,
 			},
 		})
 
 		if (!isExist) throw new NotFoundException('Income not found')
 
-		return await this.incomeRepository.find({
-			where: { id },
-		})
+		return isExist
 	}
 
 	// Update Income

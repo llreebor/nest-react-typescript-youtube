@@ -55,8 +55,8 @@ const Header = () => {
 					<FaSignOutAlt />
 				</button>
 			) : (
-				<Link to={'login'} className='text-slate-300 hover:text-white '>
-					Log In / Registration
+				<Link to='auth' className='text-slate-300 hover:text-white '>
+					Log In / Sign In
 				</Link>
 			)}
 		</div>

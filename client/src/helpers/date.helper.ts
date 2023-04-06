@@ -1,13 +1,11 @@
-import { useMemo } from 'react'
-
 type DateFormatOptions = {
 	year?: 'numeric' | '2-digit'
 	month?: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long'
 	day?: 'numeric' | '2-digit'
 }
 
-const useFormattedDate = (dateString: string): string => {
-	const date = useMemo(() => new Date(dateString), [dateString])
+const formatDate = (dateString: string): string => {
+	const date = new Date(dateString)
 	const options: DateFormatOptions = {
 		year: 'numeric',
 		month: 'long',
@@ -16,4 +14,4 @@ const useFormattedDate = (dateString: string): string => {
 	return date.toLocaleString('us-US', options)
 }
 
-export default useFormattedDate
+export default formatDate

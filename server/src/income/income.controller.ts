@@ -13,6 +13,7 @@ import { IncomeService } from './income.service'
 import { CreateIncomeDto } from './dto/create-income.dto'
 import { UpdateIncomeDto } from './dto/update-income.dto'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
+import { AuthorGuard } from 'src/guards/author.guard'
 
 @Controller('incomes')
 export class IncomeController {
@@ -21,7 +22,7 @@ export class IncomeController {
 	@Post()
 	@UseGuards(JwtAuthGuard)
 	create(@Body() createIncomeDto: CreateIncomeDto, @Req() req) {
-		return this.incomeService.create(createIncomeDto, req.user.id)
+		return this.incomeService.create(createIncomeDto, +req.user.id)
 	}
 
 	@Get()
@@ -30,20 +31,20 @@ export class IncomeController {
 		return this.incomeService.findAll(+req.user.id)
 	}
 
-	@Get(':id')
-	@UseGuards(JwtAuthGuard)
-	findOne(@Param('id') id: string, @Req() req) {
-		return this.incomeService.findOne(+id, req.user.id)
+	@Get(':type/:id')
+	@UseGuards(JwtAuthGuard, AuthorGuard)
+	findOne(@Param('id') id: string) {
+		return this.incomeService.findOne(+id)
 	}
 
-	@Patch(':id')
-	@UseGuards(JwtAuthGuard)
+	@Patch(':type/:id')
+	@UseGuards(JwtAuthGuard, AuthorGuard)
 	update(@Param('id') id: string, @Body() updateIncomeDto: UpdateIncomeDto) {
 		return this.incomeService.update(+id, updateIncomeDto)
 	}
 
-	@Delete(':id')
-	@UseGuards(JwtAuthGuard)
+	@Delete(':type/:id')
+	@UseGuards(JwtAuthGuard, AuthorGuard)
 	remove(@Param('id') id: string) {
 		return this.incomeService.remove(+id)
 	}

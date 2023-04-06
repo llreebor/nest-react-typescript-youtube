@@ -1,9 +1,12 @@
+import { Category } from 'src/category/entities/category.entity'
 import { Income } from 'src/income/entities/income.entity'
 import {
 	Column,
 	CreateDateColumn,
 	Entity,
 	JoinColumn,
+	JoinTable,
+	ManyToMany,
 	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
@@ -11,9 +14,7 @@ import {
 
 @Entity()
 export class User {
-	@PrimaryGeneratedColumn({
-		name: 'user_id',
-	})
+	@PrimaryGeneratedColumn()
 	id: number
 
 	@Column()
@@ -22,9 +23,11 @@ export class User {
 	@Column()
 	password: string
 
+	@OneToMany(() => Category, (category) => category.user)
+	categories: Category[]
+
 	@OneToMany(() => Income, (income) => income.user)
-	@JoinColumn({ name: 'income_id' })
-	income: Income[]
+	incomes: Income[]
 
 	@CreateDateColumn()
 	createdAt: Date

@@ -5,8 +5,7 @@ import Expenses from '../pages/Expenses'
 import Home from '../pages/Home'
 import Incomes, { incomeAction, incomeLoader } from '../pages/Incomes'
 import Layout from '../pages/Layout'
-import Login from '../pages/Login'
-import Registration from '../pages/Registration'
+import Auth from '../pages/Auth'
 
 export const router = createBrowserRouter([
 	{
@@ -36,17 +35,12 @@ export const router = createBrowserRouter([
 					</ProtectedRoute>
 				),
 			},
-		],
-	},
 
-	{
-		path: 'login',
-		element: <Login />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: 'registration',
-		element: <Registration />,
-		errorElement: <ErrorPage />,
+			{
+				path: 'auth',
+				element: <Auth />,
+				errorElement: <ErrorPage />,
+			},
+		],
 	},
 ])
