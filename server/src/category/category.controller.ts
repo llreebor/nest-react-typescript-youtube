@@ -8,6 +8,7 @@ import {
 	Delete,
 	UseGuards,
 	Req,
+	Query,
 } from '@nestjs/common'
 import { CategoryService } from './category.service'
 import { CreateCategoryDto } from './dto/create-category.dto'
@@ -50,5 +51,16 @@ export class CategoryController {
 	@UseGuards(JwtAuthGuard, AuthorGuard)
 	remove(@Param('id') id: string) {
 		return this.categoryService.remove(+id)
+	}
+
+	@Get('total')
+	@UseGuards(JwtAuthGuard)
+	getTotal(@Req() req) {
+		return this.categoryService.getTotalIncome()
+	}
+
+	@Get('/by-category')
+	async getIncomesByCategory(): Promise<Record<string, any>> {
+		return this.categoryService.getIncomesByCategory()
 	}
 }

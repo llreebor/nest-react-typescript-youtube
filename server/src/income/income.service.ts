@@ -32,8 +32,16 @@ export class IncomeService {
 		throw new BadRequestException('Vasya')
 	}
 
-	// Find All Incomes
-	async findAll(id: number) {
+	// // Find All Incomes
+	async findAllWithPagination(id: number, page: number, limit: number) {
+		const all = await this.incomeRepository.find({
+			where: {
+				user: {
+					id,
+				},
+			},
+		})
+		const length = all.length
 		const incomes = await this.incomeRepository.find({
 			where: {
 				user: {
@@ -42,7 +50,24 @@ export class IncomeService {
 			},
 			relations: {
 				category: true,
-				user: true,
+				user: {
+					incomes: true,
+				},
+			},
+			take: limit,
+			skip: (page - 1) * limit,
+		})
+
+		return incomes
+	}
+
+	// Find All Incomes
+	async findAll(id: number) {
+		const incomes = await this.incomeRepository.find({
+			where: {
+				user: {
+					id,
+				},
 			},
 		})
 

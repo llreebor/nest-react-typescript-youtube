@@ -5,6 +5,9 @@ import { login, logout } from './store/user/userSlice'
 import { getTokenFromLocalStorage } from './helpers/localStorage'
 import { AuthService } from './services/auth.service'
 import { router } from './router/router'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
 
 const App: FC = () => {
 	const dispatch = useAppDispatch()
@@ -34,7 +37,11 @@ const App: FC = () => {
 		checkAuth()
 	}, [])
 
-	return <RouterProvider router={router} />
+	return (
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider router={router} />
+		</QueryClientProvider>
+	)
 }
 
 export default App

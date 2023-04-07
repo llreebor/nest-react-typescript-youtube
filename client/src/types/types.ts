@@ -38,11 +38,25 @@ export interface ICategory {
 	updatedAt?: string
 }
 
+export interface ICategoryIncome {
+	title: string
+	total: number
+	incomes: IIncome[]
+}
+
 export interface IResponseIncomeLoaderData {
 	incomes: IIncome[]
 	categories: ICategory[]
+	totalIncomes: number
+	byCategory: ICategoryIncome[]
 }
 
 export interface IBudgetForm {
 	type: 'incomes' | 'expenses'
+}
+
+export interface IBudgetFormWIthPaginate {
+	type: IBudgetForm
+	page?: number
+	limit?: number
 }

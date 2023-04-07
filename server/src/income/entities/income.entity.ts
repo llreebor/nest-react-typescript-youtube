@@ -5,10 +5,7 @@ import {
 	CreateDateColumn,
 	Entity,
 	JoinColumn,
-	JoinTable,
-	ManyToMany,
 	ManyToOne,
-	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm'
@@ -30,7 +27,7 @@ export class Income {
 	@JoinColumn({ name: 'category_id' })
 	category: Category
 
-	@ManyToOne(() => User, (user) => user.incomes)
+	@ManyToOne(() => User, (user) => user.incomes, { onDelete: 'CASCADE' })
 	@JoinColumn({ name: 'user_id' })
 	user: User
 

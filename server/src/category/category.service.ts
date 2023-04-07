@@ -8,6 +8,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Category } from './entities/category.entity'
 import { Repository } from 'typeorm'
+import { IByCategory } from 'src/types/types'
 
 @Injectable()
 export class CategoryService {
@@ -91,5 +92,45 @@ export class CategoryService {
 		if (isExist) return await this.categoryRepository.delete(id)
 
 		throw new NotFoundException('Category not found')
+	}
+
+	// Total Incomes Amount
+	async getTotalIncome(): Promise<number> {
+		const categories = await this.categoryRepository.find({
+			relations: ['incomes'],
+		})
+
+		return categories.reduce(
+			(prev, curr) =>
+				prev +
+				curr.incomes.reduce(
+					(prevIncome, currIncome) => prevIncome + currIncome.amount,
+					0,
+				),
+			0,
+		)
+	}
+
+	// Get Incomes By Category
+	async getIncomesByCategory(): Promise<IByCategory[]> {
+		const categories = await this.categoryRepository.find({
+			relations: ['incomes'],
+		})
+
+		const result = []
+
+		for (const category of categories) {
+			const total = category.incomes.reduce(
+				(prev, curr) => prev + curr.amount,
+				0,
+			)
+			result.push({
+				title: category.title,
+				total,
+				incomes: category.incomes,
+			})
+		}
+
+		return result
 	}
 }

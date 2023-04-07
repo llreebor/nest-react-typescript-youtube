@@ -8,6 +8,7 @@ import {
 	Delete,
 	UseGuards,
 	Req,
+	Query,
 } from '@nestjs/common'
 import { IncomeService } from './income.service'
 import { CreateIncomeDto } from './dto/create-income.dto'
@@ -25,10 +26,24 @@ export class IncomeController {
 		return this.incomeService.create(createIncomeDto, +req.user.id)
 	}
 
-	@Get()
+	@Get('')
 	@UseGuards(JwtAuthGuard)
 	findAll(@Req() req) {
 		return this.incomeService.findAll(+req.user.id)
+	}
+
+	@Get('/pagination')
+	@UseGuards(JwtAuthGuard)
+	findAllWithPagination(
+		@Req() req,
+		@Query('page') page: number = 1,
+		@Query('limit') limit: number = 3,
+	) {
+		return this.incomeService.findAllWithPagination(
+			+req.user.id,
+			+page,
+			+limit,
+		)
 	}
 
 	@Get(':type/:id')

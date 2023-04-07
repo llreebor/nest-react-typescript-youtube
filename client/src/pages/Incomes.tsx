@@ -1,17 +1,33 @@
-import { ICategory, IIncome, IResponseIncomeLoaderData } from '../types/types'
+import {
+	ICategory,
+	ICategoryIncome,
+	IIncome,
+	IResponseIncomeLoaderData,
+} from '../types/types'
 import { redirect, useLoaderData } from 'react-router-dom'
 import BudgetForm from '../components/BudgetForm'
 import { toast } from 'react-toastify'
 import { instance } from '../api/axios.api'
 import ResultTable from '../components/ResultTable'
-import { ResponsiveContainer, PieChart, Pie, Tooltip, Cell } from 'recharts'
+import { formatToDollar } from '../helpers/currency.helper'
+import { useState } from 'react'
 
 export const incomeLoader = async () => {
 	const incomes = await instance.get<IIncome[]>('/incomes')
 	const categories = await instance.get<ICategory[]>('/categories')
-	const data = { incomes: incomes.data, categories: categories.data }
+	const total = await instance.get<number>('/categories/total')
+	const byCategory = await instance.get<ICategoryIncome>(
+		'/categories/by-category'
+	)
 
-	return data
+	const lodaderData = {
+		incomes: incomes.data,
+		categories: categories.data,
+		totalIncomes: total.data,
+		byCategory: byCategory.data,
+	}
+
+	return lodaderData
 }
 
 export const incomeAction = async ({ request }: any) => {
@@ -44,28 +60,59 @@ export const incomeAction = async ({ request }: any) => {
 }
 
 const Incomes = () => {
-	const { incomes, categories } = useLoaderData() as IResponseIncomeLoaderData
-	console.log(categories)
+	const { incomes, totalIncomes, byCategory } =
+		useLoaderData() as IResponseIncomeLoaderData
+
+	const [current, setCurrent] = useState<number>(0)
 
 	return (
 		<>
-			<div className='grid grid-cols-3 gap-5 mt-10 '>
+			<div className='grid grid-cols-3 gap-5 mt-5 '>
 				<div className='grid col-span-2'>
 					<BudgetForm type='incomes' />
 				</div>
 
-				<div className='rounded-md bg-slate-800 p-4 flex items-center justify-center flex-col gap-2'>
-					<small>Общий доход</small>
-					<small>Все доходы по категориям</small>
-					<small>Разница доход / расход</small>
-					<small>Пагинация</small>
+				<div className='grid grid-cols-2 gap-5'>
+					<div className='rounded-md bg-slate-800 p-4 flex flex-col gap-3'>
+						<div className='uppercase text-md font-bold text-center'>
+							Total Income:
+						</div>
+						<div className='bg-blue-600 p-1 rounded-sm text-center'>
+							{formatToDollar.format(totalIncomes)}
+						</div>
+					</div>
+
+					<div className='rounded-md bg-slate-800 p-4 '>
+						<small>Разница доход / расход</small>
+					</div>
+
+					<div className='rounded-md bg-slate-800 p-4 col-span-2'>
+						<div className='uppercase text-md font-bold text-center'>
+							by Category
+						</div>
+						<div className='flex flex-wrap gap-2 mt-3 justify-center'>
+							{byCategory.map((item, idx) => (
+								<button
+									onClick={() => setCurrent(item.total)}
+									className=' p-1 rounded-sm text-white/50 hover:text-white'
+									key={idx}>
+									{item.title}
+								</button>
+							))}
+						</div>
+						<div className='bg-blue-600 p-1 rounded-sm text-center mt-3'>
+							{current ? (
+								<>{formatToDollar.format(current)} </>
+							) : (
+								'Choose category'
+							)}
+						</div>
+					</div>
 				</div>
 			</div>
 
 			{incomes.length > 0 && (
-				<div className=' bg-slate-800 rounded-md p-5 mt-5'>
-					<ResultTable type='incomes' />
-				</div>
+				<ResultTable type='incomes' page={1} limit={5} />
 			)}
 		</>
 	)

@@ -77,7 +77,7 @@ const BudgetForm: FC<IBudgetForm> = ({ type }) => {
 					<Form
 						className='grid grid-cols- col-span-3 gap-2 w-[300px] p-5 rounded-md bg-slate-900'
 						method='post'
-						action={`/${'type'}`}>
+						action={`/${type}`}>
 						<label htmlFor='title'>
 							<small>Category Title</small>
 							<input
