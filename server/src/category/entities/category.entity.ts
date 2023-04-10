@@ -1,4 +1,4 @@
-import { Income } from 'src/income/entities/income.entity'
+import { Transaction } from 'src/transaction/entities/transaction.entity'
 import { User } from 'src/user/entity/user.entity'
 import {
 	Column,
@@ -19,11 +19,11 @@ export class Category {
 	@Column()
 	title: string
 
-	@OneToMany(() => Income, (income) => income.category, {
+	@OneToMany(() => Transaction, (transaction) => transaction.category, {
 		onDelete: 'SET NULL',
 	})
-	@JoinColumn({ name: 'income_id' })
-	incomes: Income[]
+	@JoinColumn({ name: 'transaction_id' })
+	transactions: Transaction[]
 
 	@ManyToOne(() => User, (user) => user.categories)
 	@JoinColumn({ name: 'user_id' })

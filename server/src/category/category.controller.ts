@@ -53,12 +53,6 @@ export class CategoryController {
 		return this.categoryService.remove(+id)
 	}
 
-	@Get('total')
-	@UseGuards(JwtAuthGuard)
-	getTotal(@Req() req) {
-		return this.categoryService.getTotalIncome()
-	}
-
 	@Get('/by-category')
 	async getIncomesByCategory(): Promise<Record<string, any>> {
 		return this.categoryService.getIncomesByCategory()

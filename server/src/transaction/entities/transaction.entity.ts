@@ -11,8 +11,8 @@ import {
 } from 'typeorm'
 
 @Entity()
-export class Income {
-	@PrimaryGeneratedColumn({ name: 'income_id' })
+export class Transaction {
+	@PrimaryGeneratedColumn({ name: 'transaction_id' })
 	id: number
 
 	@Column()
@@ -21,13 +21,16 @@ export class Income {
 	@Column()
 	amount: number
 
-	@ManyToOne(() => Category, (category) => category.incomes, {
+	@Column({ nullable: true })
+	type: string
+
+	@ManyToOne(() => Category, (category) => category.transactions, {
 		onDelete: 'SET NULL',
 	})
 	@JoinColumn({ name: 'category_id' })
 	category: Category
 
-	@ManyToOne(() => User, (user) => user.incomes, { onDelete: 'CASCADE' })
+	@ManyToOne(() => User, (user) => user.transactions, { onDelete: 'CASCADE' })
 	@JoinColumn({ name: 'user_id' })
 	user: User
 

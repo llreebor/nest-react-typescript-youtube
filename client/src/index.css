@@ -6,6 +6,13 @@
 	body {
 		@apply text-sm;
 	}
+
+	td {
+		@apply capitalize text-white/50;
+	}
+	thead td {
+		@apply text-white;
+	}
 }
 @layer components {
 	.btn {

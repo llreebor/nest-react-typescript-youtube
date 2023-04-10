@@ -5,12 +5,12 @@ import {
 	NotFoundException,
 } from '@nestjs/common'
 import { CategoryService } from 'src/category/category.service'
-import { IncomeService } from 'src/income/income.service'
+import { TransactionService } from 'src/transaction/transaction.service'
 
 @Injectable()
 export class AuthorGuard implements CanActivate {
 	constructor(
-		private incomeService: IncomeService,
+		private transactionService: TransactionService,
 		private categoryService: CategoryService,
 	) {}
 
@@ -21,8 +21,8 @@ export class AuthorGuard implements CanActivate {
 		let entity // инициализируем переменную для сущности, которую проверяем
 
 		switch (type) {
-			case 'income':
-				entity = await this.incomeService.findOne(id) // получаем информацию о доходе из сервиса доходов
+			case 'transaction':
+				entity = await this.transactionService.findOne(id) // получаем информацию о доходе из сервиса доходов
 				break
 			case 'category':
 				entity = await this.categoryService.findOne(id) // получаем информацию о категории из сервиса категорий

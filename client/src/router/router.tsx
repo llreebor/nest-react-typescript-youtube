@@ -1,15 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from '../components/ProtectedRoute'
 import ErrorPage from '../pages/ErrorPage'
-import Expenses from '../pages/Expenses'
 import Home from '../pages/Home'
-import Incomes, { incomeAction, incomeLoader } from '../pages/Incomes'
 import Layout from '../pages/Layout'
 import Auth from '../pages/Auth'
 import Categories, {
 	categoriesAction,
 	categoriesLoader,
 } from '../pages/Categories'
+import Transactions, {
+	transactionsAction,
+	transactionsLoader,
+} from '../pages/Transactions'
 
 export const router = createBrowserRouter([
 	{
@@ -22,12 +24,12 @@ export const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
-				path: 'incomes',
-				loader: incomeLoader,
-				action: incomeAction,
+				path: 'transactions',
+				loader: transactionsLoader,
+				action: transactionsAction,
 				element: (
 					<ProtectedRoute>
-						<Incomes />
+						<Transactions />
 					</ProtectedRoute>
 				),
 			},
@@ -37,15 +39,6 @@ export const router = createBrowserRouter([
 				loader: categoriesLoader,
 				action: categoriesAction,
 			},
-			{
-				path: 'expenses',
-				element: (
-					<ProtectedRoute>
-						<Expenses />
-					</ProtectedRoute>
-				),
-			},
-
 			{
 				path: 'auth',
 				element: <Auth />,

@@ -22,9 +22,10 @@ export interface IResponseDataUser {
 	message: string | undefined
 }
 
-export interface IIncome {
+export interface ITransaction {
 	title: string
 	amount: number
+	type: string | null
 	id?: number
 	category?: ICategory
 	createdAt?: string
@@ -38,17 +39,18 @@ export interface ICategory {
 	updatedAt?: string
 }
 
-export interface ICategoryIncome {
+export interface ICategoryTransaction {
 	title: string
 	total: number
-	incomes: IIncome[]
+	transactions: ITransaction[]
 }
 
-export interface IResponseIncomeLoaderData {
-	incomes: IIncome[]
+export interface IResponseTransactionLoaderData {
+	transactions: ITransaction[]
 	categories: ICategory[]
 	totalIncomes: number
-	byCategory: ICategoryIncome[]
+	totalExpenses: number
+	byCategory: ICategoryTransaction[]
 }
 
 export interface IBudgetForm {

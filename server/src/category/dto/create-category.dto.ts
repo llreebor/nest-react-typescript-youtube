@@ -1,8 +1,8 @@
-import { Income } from 'src/income/entities/income.entity'
+import { Transaction } from 'src/transaction/entities/transaction.entity'
 import { User } from 'src/user/entity/user.entity'
 
 export class CreateCategoryDto {
 	title: string
 	user?: User
-	income?: Income
+	transaction?: Transaction
 }

@@ -3,13 +3,12 @@ import { CategoryService } from './category.service'
 import { CategoryController } from './category.controller'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Category } from './entities/category.entity'
-import { IncomeService } from 'src/income/income.service'
-import { AuthorGuard } from 'src/guards/author.guard'
-import { Income } from 'src/income/entities/income.entity'
+import { Transaction } from 'src/transaction/entities/transaction.entity'
+import { TransactionService } from 'src/transaction/transaction.service'
 
 @Module({
-	imports: [TypeOrmModule.forFeature([Category, Income])],
+	imports: [TypeOrmModule.forFeature([Category, Transaction])],
 	controllers: [CategoryController],
-	providers: [CategoryService, IncomeService],
+	providers: [CategoryService, TransactionService],
 })
 export class CategoryModule {}

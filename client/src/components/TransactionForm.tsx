@@ -1,16 +1,16 @@
 import { FC, useState } from 'react'
 import { Form, useLoaderData } from 'react-router-dom'
-import { IBudgetForm, IResponseIncomeLoaderData } from '../types/types'
-import { FaEdit, FaPlus } from 'react-icons/fa'
+import { IResponseTransactionLoaderData } from '../types/types'
+import { FaPlus } from 'react-icons/fa'
 
-const BudgetForm: FC<IBudgetForm> = ({ type }) => {
-	const { categories } = useLoaderData() as IResponseIncomeLoaderData
+const TransactionForm: FC = () => {
+	const { categories } = useLoaderData() as IResponseTransactionLoaderData
 	const [visibleModal, setVisibleModal] = useState(false)
 
 	return (
 		<div className='rounded-md bg-slate-800 p-4'>
 			{/* Add Income form */}
-			<Form className='grid gap-2' method='post' action={`/${type}`}>
+			<Form className='grid gap-2' method='post' action='/transactions'>
 				<label htmlFor='title'>
 					Title
 					<input
@@ -63,6 +63,28 @@ const BudgetForm: FC<IBudgetForm> = ({ type }) => {
 					</button>
 				</div>
 
+				<div className='flex gap-4'>
+					<label className='cursor-pointer flex items-center gap-2'>
+						<input
+							type='radio'
+							className='form-radio text-blue-600'
+							name='type'
+							value='income'
+						/>
+						<span>Income</span>
+					</label>
+
+					<label className='cursor-pointer flex items-center gap-2'>
+						<input
+							type='radio'
+							className='form-radio text-blue-600'
+							name='type'
+							value='expense'
+						/>
+						<span>Expense</span>
+					</label>
+				</div>
+
 				<button
 					disabled={!categories.length}
 					type='submit'
@@ -77,7 +99,7 @@ const BudgetForm: FC<IBudgetForm> = ({ type }) => {
 					<Form
 						className='grid grid-cols- col-span-3 gap-2 w-[300px] p-5 rounded-md bg-slate-900'
 						method='post'
-						action={`/${type}`}>
+						action='transaactions'>
 						<label htmlFor='title'>
 							<small>Category Title</small>
 							<input
@@ -106,4 +128,4 @@ const BudgetForm: FC<IBudgetForm> = ({ type }) => {
 	)
 }
 
-export default BudgetForm
+export default TransactionForm

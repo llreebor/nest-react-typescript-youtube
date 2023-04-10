@@ -5,10 +5,8 @@ import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { IncomeModule } from './income/income.module'
-import { ExpenseModule } from './expense/expense.module'
 import { CategoryModule } from './category/category.module'
-import { AuthorGuard } from './guards/author.guard'
+import { TransactionModule } from './transaction/transaction.module'
 
 @Module({
 	imports: [
@@ -29,9 +27,8 @@ import { AuthorGuard } from './guards/author.guard'
 			}),
 			inject: [ConfigService],
 		}),
-		IncomeModule,
-		ExpenseModule,
 		CategoryModule,
+		TransactionModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

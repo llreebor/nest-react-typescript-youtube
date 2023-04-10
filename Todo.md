@@ -8,7 +8,7 @@
     *** CRUD CATEGORIES
     +   Title
 
-# Incomes
+# Transactions
 
     *** CRUD INCOMES
     +   Title
@@ -16,13 +16,3 @@
     +   Category
     +   Date
     *** Total INCOMES
-
-# Expenses
-
-    *** CRUD EXPENSES
-    +   Title
-    +   Sum
-    +   Category
-    +   Date
-    *** Limit EXPENSES
-    *** Total EXPENSES

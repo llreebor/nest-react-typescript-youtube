@@ -1,9 +1,10 @@
 import { Category } from 'src/category/entities/category.entity'
 import { User } from 'src/user/entity/user.entity'
 
-export class CreateIncomeDto {
+export class CreateTransactionDto {
 	title: string
 	amount: number
-	category: Category
+	type: 'expense' | 'income'
+	category?: Category
 	user?: User
 }

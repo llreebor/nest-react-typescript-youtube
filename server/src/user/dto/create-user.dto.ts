@@ -1,5 +1,4 @@
 import { IsEmail, IsOptional, MinLength } from 'class-validator'
-import { Income } from 'src/income/entities/income.entity'
 
 export class CreateUserDto {
 	@IsEmail()

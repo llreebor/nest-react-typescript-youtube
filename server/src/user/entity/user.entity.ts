@@ -1,12 +1,9 @@
 import { Category } from 'src/category/entities/category.entity'
-import { Income } from 'src/income/entities/income.entity'
+import { Transaction } from 'src/transaction/entities/transaction.entity'
 import {
 	Column,
 	CreateDateColumn,
 	Entity,
-	JoinColumn,
-	JoinTable,
-	ManyToMany,
 	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
@@ -26,8 +23,8 @@ export class User {
 	@OneToMany(() => Category, (category) => category.user)
 	categories: Category[]
 
-	@OneToMany(() => Income, (income) => income.user)
-	incomes: Income[]
+	@OneToMany(() => Transaction, (transaction) => transaction.user)
+	transactions: Transaction[]
 
 	@CreateDateColumn()
 	createdAt: Date

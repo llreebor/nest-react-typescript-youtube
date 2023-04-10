@@ -43,7 +43,7 @@ export class CategoryService {
 				},
 			},
 			relations: {
-				incomes: true,
+				transactions: true,
 			},
 		})
 	}
@@ -94,40 +94,23 @@ export class CategoryService {
 		throw new NotFoundException('Category not found')
 	}
 
-	// Total Incomes Amount
-	async getTotalIncome(): Promise<number> {
-		const categories = await this.categoryRepository.find({
-			relations: ['incomes'],
-		})
-
-		return categories.reduce(
-			(prev, curr) =>
-				prev +
-				curr.incomes.reduce(
-					(prevIncome, currIncome) => prevIncome + currIncome.amount,
-					0,
-				),
-			0,
-		)
-	}
-
 	// Get Incomes By Category
 	async getIncomesByCategory(): Promise<IByCategory[]> {
 		const categories = await this.categoryRepository.find({
-			relations: ['incomes'],
+			relations: ['transactions'],
 		})
 
 		const result = []
 
 		for (const category of categories) {
-			const total = category.incomes.reduce(
+			const total = category.transactions.reduce(
 				(prev, curr) => prev + curr.amount,
 				0,
 			)
 			result.push({
 				title: category.title,
 				total,
-				incomes: category.incomes,
+				transactions: category.transactions,
 			})
 		}
 

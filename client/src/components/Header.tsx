@@ -33,15 +33,8 @@ const Header = () => {
 					<li>
 						<Link
 							className='text-slate-300 hover:text-white'
-							to='/incomes'>
-							Incomes
-						</Link>
-					</li>
-					<li>
-						<Link
-							className='text-slate-300 hover:text-white'
-							to='/expenses'>
-							Expenses
+							to='/transactions'>
+							Transactions
 						</Link>
 					</li>
 
