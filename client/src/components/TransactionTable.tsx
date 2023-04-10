@@ -8,17 +8,16 @@ import ReactPaginate from 'react-paginate'
 import { formatToDollar } from '../helpers/currency.helper'
 
 interface IProps {
-	page?: number
-	limit?: number
+	limit: number
 }
 
-const ResultTable: FC<IProps> = ({ page = 1, limit = 1 }) => {
+const TransactionTable: FC<IProps> = ({ limit = 1 }) => {
 	const { transactions } = useLoaderData() as IResponseTransactionLoaderData
 	const [currentPage, setCurrentPage] = useState(1)
 	const [totalPages, setTotalPages] = useState(0)
 	const [data, setData] = useState<ITransaction[]>([])
 
-	const fetchData = async (page: number) => {
+	const fetchTransactions = async (page: number) => {
 		const response = await instance.get(
 			`/transactions/pagination/?page=${page}&limit=${limit}`
 		)
@@ -31,15 +30,15 @@ const ResultTable: FC<IProps> = ({ page = 1, limit = 1 }) => {
 	}
 
 	useEffect(() => {
-		fetchData(currentPage)
+		fetchTransactions(currentPage)
 	}, [currentPage, transactions])
 
 	return (
 		<>
 			<ReactPaginate
 				className='flex gap-3 justify-end mt-4 items-center'
-				activeLinkClassName='bg-blue-500'
-				pageLinkClassName='text-white  text-xs py-1 px-2 bg-slate-800 rounded-sm'
+				activeClassName='bg-blue-600 rounded-sm'
+				pageLinkClassName='text-white  text-xs py-1 px-2  rounded-sm'
 				previousClassName={
 					'text-white py-1 px-2 bg-slate-800 rounded-sm text-xs'
 				}
@@ -123,4 +122,4 @@ const ResultTable: FC<IProps> = ({ page = 1, limit = 1 }) => {
 	)
 }
 
-export default ResultTable
+export default TransactionTable

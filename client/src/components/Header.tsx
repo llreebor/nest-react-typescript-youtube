@@ -5,6 +5,8 @@ import { removeTokenFromLocalStorage } from '../helpers/localStorage'
 import { useAuth } from '../hooks/useAuth'
 import { toast } from 'react-toastify'
 import { FaSignOutAlt, FaBtc } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
+
 const Header = () => {
 	const isAuth = useAuth()
 	const dispatch = useAppDispatch()
@@ -24,26 +26,32 @@ const Header = () => {
 			{isAuth && (
 				<ul className='flex items-center gap-5 ml-auto mr-10'>
 					<li>
-						<Link
-							className='text-slate-300 hover:text-white'
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'text-white' : 'text-white/50'
+							}
 							to='/'>
 							Home
-						</Link>
+						</NavLink>
 					</li>
 					<li>
-						<Link
-							className='text-slate-300 hover:text-white'
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'text-white' : 'text-white/50'
+							}
 							to='/transactions'>
 							Transactions
-						</Link>
+						</NavLink>
 					</li>
 
 					<li>
-						<Link
-							className='text-slate-300 hover:text-white'
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'text-white' : 'text-white/50'
+							}
 							to='/categories'>
 							Categories
-						</Link>
+						</NavLink>
 					</li>
 				</ul>
 			)}
@@ -54,7 +62,7 @@ const Header = () => {
 					<FaSignOutAlt />
 				</button>
 			) : (
-				<Link to='auth' className='text-slate-300 hover:text-white '>
+				<Link to='auth' className='text-white/50 hover:text-white '>
 					Log In / Sign In
 				</Link>
 			)}

@@ -6,7 +6,6 @@ import { FaPlus } from 'react-icons/fa'
 const TransactionForm: FC = () => {
 	const { categories } = useLoaderData() as IResponseTransactionLoaderData
 	const [visibleModal, setVisibleModal] = useState(false)
-
 	return (
 		<div className='rounded-md bg-slate-800 p-4'>
 			{/* Add Income form */}
@@ -53,15 +52,13 @@ const TransactionForm: FC = () => {
 					</h1>
 				)}
 
-				<div>
-					<button
-						type='button'
-						onClick={() => setVisibleModal(!visibleModal)}
-						className='max-w-fit flex items-center gap-2 text-white/50 hover:text-white'>
-						<FaPlus />
-						<span>Create a new category</span>
-					</button>
-				</div>
+				<button
+					type='button'
+					onClick={() => setVisibleModal(!visibleModal)}
+					className='max-w-fit flex items-center gap-2 text-white/50 hover:text-white'>
+					<FaPlus />
+					<span>Manage Categories</span>
+				</button>
 
 				<div className='flex gap-4'>
 					<label className='cursor-pointer flex items-center gap-2'>
@@ -93,13 +90,14 @@ const TransactionForm: FC = () => {
 				</button>
 			</Form>
 
-			{/* Edit Modal Form */}
+			{/* Add Category */}
 			{visibleModal && (
 				<div className='fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center'>
 					<Form
-						className='grid grid-cols- col-span-3 gap-2 w-[300px] p-5 rounded-md bg-slate-900'
+						className='grid grid-cols gap-2 w-[300px] p-5 rounded-md bg-slate-900'
 						method='post'
-						action='transaactions'>
+						action='/categories'
+						replace>
 						<label htmlFor='title'>
 							<small>Category Title</small>
 							<input

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { instance } from '../api/axios.api'
 import { ICategory } from '../types/types'
-import { Form, redirect, useLoaderData } from 'react-router-dom'
+import { Form, useLoaderData } from 'react-router-dom'
 import { AiFillCloseCircle, AiFillEdit } from 'react-icons/ai'
 import { FaPlus } from 'react-icons/fa'
 import CategoryModal from '../components/CategoryModal'
@@ -20,7 +20,7 @@ export const categoriesAction = async ({ request }: any) => {
 			}
 			await instance.post('/categories', category)
 
-			return redirect('/categories')
+			return null
 		}
 
 		case 'DELETE': {
@@ -28,7 +28,7 @@ export const categoriesAction = async ({ request }: any) => {
 			const categoryId = formData.get('id')
 
 			await instance.delete(`/categories/category/${categoryId}`)
-			return redirect('/categories')
+			return null
 		}
 
 		case 'PATCH': {
@@ -42,7 +42,7 @@ export const categoriesAction = async ({ request }: any) => {
 				`/categories/category/${category.id}`,
 				category
 			)
-			return redirect('/categories')
+			return null
 		}
 	}
 }
@@ -61,7 +61,7 @@ const Categories = () => {
 					{categories.map((category, idx) => (
 						<div
 							key={idx}
-							className='group py-2 px-4 rounded-lg bg-blue-800 flex items-center gap-2 relative'>
+							className='group py-2 px-4 rounded-lg bg-blue-600 flex items-center gap-2 relative'>
 							{category.title}
 							<div className='absolute px-3  left-0 top-0 bottom-0 right-0 rounded-lg bg-black/90 items-center justify-between hidden group-hover:flex'>
 								<button

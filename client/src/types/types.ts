@@ -12,6 +12,7 @@ export interface IUserData {
 	email: string
 	password: string
 }
+
 export interface IResponseDataUser {
 	createdAt: string | undefined
 	email: string | undefined
@@ -34,6 +35,7 @@ export interface ITransaction {
 
 export interface ICategory {
 	id?: number
+	type?: 'income' | 'expense'
 	title: string
 	createdAt?: string
 	updatedAt?: string

@@ -43,6 +43,9 @@ export class TransactionService {
 					transactions: true,
 				},
 			},
+			order: {
+				createdAt: 'DESC',
+			},
 			take: limit,
 			skip: (page - 1) * limit,
 		})
@@ -57,6 +60,9 @@ export class TransactionService {
 				user: {
 					id,
 				},
+			},
+			order: {
+				createdAt: 'DESC',
 			},
 		})
 

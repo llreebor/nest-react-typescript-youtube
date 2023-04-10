@@ -35,9 +35,13 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: 'categories',
-				element: <Categories />,
 				loader: categoriesLoader,
 				action: categoriesAction,
+				element: (
+					<ProtectedRoute>
+						<Categories />
+					</ProtectedRoute>
+				),
 			},
 			{
 				path: 'auth',

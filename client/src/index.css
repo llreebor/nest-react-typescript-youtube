@@ -21,6 +21,9 @@
 	.input {
 		@apply bg-transparent p-2 border bg-slate-700 placeholder:text-white border-slate-800 text-sm rounded-md outline-none focus:border-slate-300 text-white placeholder:text-white/50;
 	}
+	.container {
+		@apply max-w-[1000px];
+	}
 }
 
 @layer utilities {

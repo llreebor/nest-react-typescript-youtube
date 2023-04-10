@@ -13,8 +13,4 @@ const Layout: FC = () => {
 	)
 }
 
-export const layouthLoader = () => {
-	console.log(22)
-}
-
 export default Layout
