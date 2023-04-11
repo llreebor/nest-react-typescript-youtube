@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, redirect, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../store/hooks'
 import { logout } from '../store/user/userSlice'
 import { removeTokenFromLocalStorage } from '../helpers/localStorage'
@@ -10,11 +10,13 @@ import { NavLink } from 'react-router-dom'
 const Header = () => {
 	const isAuth = useAuth()
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 
 	const logoutHandler = () => {
 		dispatch(logout())
 		removeTokenFromLocalStorage('token')
 		toast.success('You logged out!')
+		navigate('/')
 	}
 
 	return (
@@ -62,7 +64,9 @@ const Header = () => {
 					<FaSignOutAlt />
 				</button>
 			) : (
-				<Link to='auth' className='text-white/50 hover:text-white '>
+				<Link
+					to='auth'
+					className='py-2 text-white/50 hover:text-white '>
 					Log In / Sign In
 				</Link>
 			)}

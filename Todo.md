@@ -16,3 +16,5 @@
     +   Category
     +   Date
     *** Total INCOMES
+
+# Fix AuthorGuard in Transactions controller

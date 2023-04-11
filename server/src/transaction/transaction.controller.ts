@@ -35,7 +35,7 @@ export class IncomeController {
 		return this.transactionService.findAllByType(+req.user.id, type)
 	}
 
-	@Get('')
+	@Get()
 	@UseGuards(JwtAuthGuard)
 	findAll(@Req() req) {
 		return this.transactionService.findAll(+req.user.id)

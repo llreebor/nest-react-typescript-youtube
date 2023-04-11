@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service'
 const Auth = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const [isLogin, setIsLogin] = useState<boolean>(true)
+	const [isLogin, setIsLogin] = useState<boolean>(false)
 
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
@@ -22,9 +22,7 @@ const Auth = () => {
 				setTokenToLocalStorage('token', data.token)
 				dispatch(login(data))
 
-				toast.success('You logged in!', {
-					position: 'bottom-right',
-				})
+				toast.success('You logged in!')
 
 				navigate('/')
 			}
@@ -42,9 +40,7 @@ const Auth = () => {
 			e.preventDefault()
 			const data = await AuthService.registration({ email, password })
 			if (data) {
-				toast.success('Account has been created', {
-					position: 'bottom-right',
-				})
+				toast.success('Account has been created')
 
 				setIsLogin(!isLogin)
 			}
@@ -76,16 +72,14 @@ const Auth = () => {
 					/>
 					<input
 						className='bg-transparent py-2 px-4 border border-slate-800 rounded-md outline-none focus:border-slate-300'
-						type='text'
+						type='password'
 						placeholder='Password'
 						name='password'
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 
 					<div className='flex items-center gap-10 justify-between'>
-						<button
-							type='submit'
-							className='bg-sky-500 rounded-md px-6 py-2 hover:bg-sky-600 mx-auto'>
+						<button type='submit' className='btn btn-green mx-auto'>
 							Submit
 						</button>
 					</div>

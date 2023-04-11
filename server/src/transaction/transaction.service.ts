@@ -2,8 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateTransactionDto } from './dto/create-transaction.dto'
 import { UpdateTransactionDto } from './dto/update-transaction.dto'
 import { InjectRepository } from '@nestjs/typeorm'
-
-import { Brackets, Repository } from 'typeorm'
+import { Repository } from 'typeorm'
 import { Transaction } from './entities/transaction.entity'
 
 @Injectable()

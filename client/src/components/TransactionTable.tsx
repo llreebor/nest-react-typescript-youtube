@@ -5,7 +5,7 @@ import { Form, useLoaderData } from 'react-router-dom'
 import { IResponseTransactionLoaderData, ITransaction } from '../types/types'
 import { instance } from '../api/axios.api'
 import ReactPaginate from 'react-paginate'
-import { formatToDollar } from '../helpers/currency.helper'
+import { formatToUSD } from '../helpers/currency.helper'
 
 interface IProps {
 	limit: number
@@ -83,10 +83,10 @@ const TransactionTable: FC<IProps> = ({ limit = 1 }) => {
 											: 'text-red-500'
 									}>
 									{transaction.type === 'income'
-										? `+ ${formatToDollar.format(
+										? `+ ${formatToUSD.format(
 												transaction.amount
 										  )}`
-										: `- ${formatToDollar.format(
+										: `- ${formatToUSD.format(
 												transaction.amount
 										  )}`}
 								</td>
